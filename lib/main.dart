@@ -6,10 +6,12 @@ void main(List<String> args) {
 
 class MyApp extends StatefulWidget {
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<MyApp> createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
+  //const MyAppState({super.key});
+
   double totalCost = 0;
   double preCost = 0;
 
@@ -164,8 +166,62 @@ class _MyAppState extends State<MyApp> {
                         )),
                   ),
                 ),
+                InitialState(),
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class InitialState extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Container(
+      child: ElevatedButton(
+        child: const Text('Pagar'),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Payment()),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class Payment extends StatelessWidget {
+  const Payment({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Calculadora de propina'),
+        backgroundColor: Colors.indigo,
+      ),
+      body: Center(
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Gracias!",
+                style: TextStyle(
+                  fontFamily: 'RobotoMno',
+                  fontSize: 25,
+                  color: Colors.black,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Regresar'),
+              ),
+            ],
           ),
         ),
       ),
